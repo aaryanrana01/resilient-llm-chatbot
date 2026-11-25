@@ -1,0 +1,39 @@
+# Render Blueprint: deploys both tiers from this repo (New > Blueprint in the Render dashboard).
+# After the first deploy, fill the two "sync: false" values that point the tiers at each other.
+services:
+  - type: web
+    name: llm-chatbot-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: LLM_API_KEYS          # gsk_key1,gsk_key2  (secret - entered in the dashboard)
+        sync: false
+      - key: ALLOWED_ORIGINS       # https://<your-frontend>.onrender.com
+        sync: false
+      - key: LLM_MODEL
+        value: groq/openai/gpt-oss-120b
+      - key: DATABASE_URL
+        value: sqlite:////data/app.db
+      - key: ENABLE_FAILURE_SIMULATION
+        value: "true"
+      - key: LLM_REASONING_EFFORT
+        value: low
+
+  - type: web
+    name: llm-chatbot-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    headers:
+      - path: /config.js
+        name: Cache-Control
+        value: no-store
+    envVars:
+      - key: VITE_API_BASE_URL     # https://<your-backend>.onrender.com
+        sync: false
+      - key: NODE_VERSION
+        value: "22"

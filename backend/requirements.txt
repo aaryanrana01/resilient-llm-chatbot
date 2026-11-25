@@ -1,0 +1,5 @@
+fastapi==0.165.0
+uvicorn==0.54.0
+litellm==1.111.0
+# LiteLLM's Router imports orjson on its fallback path; it is not pulled in automatically.
+orjson==3.13.0
