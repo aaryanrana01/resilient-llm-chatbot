@@ -27,9 +27,9 @@ flowchart LR
 
 | | URL |
 | --- | --- |
-| Frontend | `https://<your-frontend>.onrender.com` |
-| Backend | `https://<your-backend>.onrender.com` (try `/health`) |
-| Repository | `https://github.com/<you>/<repo>` |
+| Frontend | [https://llm-chatbot-web.onrender.com](https://llm-chatbot-web.onrender.com) |
+| Backend | [https://llm-chatbot-api-im3r.onrender.com](https://llm-chatbot-api-im3r.onrender.com/health) (try [`/health`](https://llm-chatbot-api-im3r.onrender.com/health)) |
+| Repository | [https://github.com/aaryanrana01/resilient-llm-chatbot](https://github.com/aaryanrana01/resilient-llm-chatbot) |
 | Demo video | `<link>` |
 
 > The backend runs on Render's free tier, which sleeps after about 15 minutes without traffic. The first request after that can take around 30–50 s while it wakes up. The UI shows *Connecting…* until `/health` answers.
